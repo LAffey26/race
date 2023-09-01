@@ -10,7 +10,7 @@ from pygame.locals import (
 
 HEIGHT = 1080
 WIDTH = 1920
-background_image = pygame.image.load('фон пробный.png')
+background_image = pygame.image.load('background.png')
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
