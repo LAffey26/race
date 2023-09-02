@@ -12,8 +12,7 @@ class Player(pygame.sprite.Sprite):
             pygame.image.load("image/chicken.png"),
             pygame.image.load("image/chicken_going_1.png"),
             pygame.image.load("image/chicken_going_2.png"),
-            pygame.image.load("image/chicken_sit.png")
-        ]
+            pygame.image.load("image/chicken_sit.png")]
         self.surf_jump = pygame.image.load("image/chicken_jump.png")
         self.surf = self.walking_on_ticks[self.correct_anim]
         self.surf.set_colorkey((255, 255, 255))
