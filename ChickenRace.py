@@ -15,15 +15,29 @@ background_image = pygame.image.load('background.png')
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf_standing = pygame.image.load("chicken.png")
+        self.correct_anim = 0 
+        self.walking_on_ticks = [
+            pygame.image.load("chicken.png"),
+            pygame.image.load("chicken_going_1.png"),
+            pygame.image.load("chicken_going_2.png"),
+            pygame.image.load("chicken_sit.png")
+        ]
         self.surf_jump = pygame.image.load("chicken_jump.png")
-        self.surf = self.surf_standing
-        self.surf.set_colorkey((255,255,255),RLEACCEL)
+        self.surf = self.walking_on_ticks[self.correct_anim]
+        self.surf.set_colorkey((255,255,255))
         self.rect = self.surf.get_rect(topleft=(300, 675))
         self.jumping = False
         self.jump_time = 0
+        self.walk_animation_timer = pygame.time.get_ticks()
 
     def update(self, pressed_keys):
+        walk_animation_speed = 100        
+
+        if pygame.time.get_ticks() - self.walk_animation_timer > walk_animation_speed:
+            self.walk_animation_timer = pygame.time.get_ticks()
+            self.correct_anim = (self.correct_anim + 1) % len(self.walking_on_ticks)
+
+
         if pressed_keys[K_SPACE] and not self.jumping:
             self.jumping = True
             self.jump_time = 60
@@ -35,7 +49,7 @@ class Player(pygame.sprite.Sprite):
 
         if self.jump_time == 0:
             self.rect.move_ip(0, 5)
-            self.surf = self.surf_standing
+            self.surf = self.walking_on_ticks[self.correct_anim]
         if self.rect.bottom == 675:
             self.jumping = False
 
@@ -47,10 +61,9 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, speed = 5):
         super(Enemy, self).__init__()
-        self.surf = pygame.Surface((80, 70))
-        self.surf.fill((255, 0, 0))
-        self.rect = self.surf.get_rect(topleft=(random.randint(WIDTH+20, WIDTH+120), 605)
-                                       )
+        self.surf = pygame.image.load("Enemy.png")
+        self.surf.set_colorkey((255,255,255))
+        self.rect = self.surf.get_rect(topleft=(random.randint(WIDTH+20, WIDTH+120), 605))
         self.speed = speed 
 
     def update(self):
@@ -63,13 +76,31 @@ class Enemy(pygame.sprite.Sprite):
 class Objects(pygame.sprite.Sprite):
     def __init__(self,speed = 5):
         super(Objects,self).__init__()
-        self.surf = pygame.Surface((100, 35))
-        self.surf.fill((0, 255, 0))
+        self.correct_anim = 0
+        self.walking_on_ticks = [
+            pygame.image.load("bird_1.png"),
+            pygame.image.load("bird_2.png"),
+            pygame.image.load("bird_3.png"),
+            pygame.image.load("bird_4.png"),      
+            pygame.image.load("bird_5.png"),
+            pygame.image.load("bird_4.png"),
+            pygame.image.load("bird_3.png"),
+            pygame.image.load("bird_2.png") 
+        ]
+        self.surf = self.walking_on_ticks[self.correct_anim]
         self.rect = self.surf.get_rect(
         topleft=(random.randint(WIDTH+20,WIDTH+100), random.randint(425,475)))
         self.speed = speed
+        self.walk_animation_timer = pygame.time.get_ticks()
 
     def update(self):
+        walk_animation_speed = 500        
+
+        if pygame.time.get_ticks() - self.walk_animation_timer > walk_animation_speed:
+            self.walk_animation_timer = pygame.time.get_ticks()
+            self.correct_anim = (self.correct_anim + 1) % len(self.walking_on_ticks)
+            self
+
         self.rect.move_ip(-self.speed, 0)
         if self.rect.left <= 0:
             self.kill()
@@ -128,7 +159,7 @@ while running:
 
     player.update(pressed_keys)
     player.limit()
-    
+    objects.update()
     enemies.update()
 
     screen.blit(background_image, (0, 0))
