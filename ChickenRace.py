@@ -1,78 +1,17 @@
 import pygame
 import random
-import sys
 from pygame.locals import (
     K_SPACE,
     QUIT,
     K_ESCAPE,
-    RLEACCEL,
     KEYDOWN)
+from enemy import Enemy
+from player import Player
+from objects import Objects
 
 HEIGHT = 1080
 WIDTH = 1920
-background_image = pygame.image.load('фон пробный.png')
-
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Player, self).__init__()
-        self.surf_standing = pygame.image.load("chicken.png")
-        self.surf_jump = pygame.image.load("chicken_jump.png")
-        self.surf = self.surf_standing
-        self.surf.set_colorkey((255,255,255),RLEACCEL)
-        self.rect = self.surf.get_rect(topleft=(300, 675))
-        self.jumping = False
-        self.jump_time = 0
-
-    def update(self, pressed_keys):
-        if pressed_keys[K_SPACE] and not self.jumping:
-            self.jumping = True
-            self.jump_time = 60
-
-        if self.jump_time != 0:
-            self.rect.move_ip(0, -5)
-            self.jump_time -= 1
-            self.surf = self.surf_jump
-
-        if self.jump_time == 0:
-            self.rect.move_ip(0, 5)
-            self.surf = self.surf_standing
-        if self.rect.bottom == 675:
-            self.jumping = False
-
-    def limit(self):
-        if self.rect.bottom > 675:
-            self.rect.bottom = 675
-
-
-class Enemy(pygame.sprite.Sprite):
-    def __init__(self, speed = 5):
-        super(Enemy, self).__init__()
-        self.surf = pygame.Surface((80, 70))
-        self.surf.fill((255, 0, 0))
-        self.rect = self.surf.get_rect(topleft=(random.randint(WIDTH+20, WIDTH+120), 605)
-                                       )
-        self.speed = speed 
-
-    def update(self):
-
-        self.rect.move_ip(-self.speed, 0)
-        if self.rect.left <= 0:
-            self.kill()
-
-
-class Objects(pygame.sprite.Sprite):
-    def __init__(self,speed = 5):
-        super(Objects,self).__init__()
-        self.surf = pygame.Surface((100, 35))
-        self.surf.fill((0, 255, 0))
-        self.rect = self.surf.get_rect(
-        topleft=(random.randint(WIDTH+20,WIDTH+100), random.randint(425,475)))
-        self.speed = speed
-
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        if self.rect.left <= 0:
-            self.kill()
+background_image = pygame.image.load('image/background.png')
 
 
 pygame.init()
@@ -128,7 +67,7 @@ while running:
 
     player.update(pressed_keys)
     player.limit()
-    
+    objects.update()
     enemies.update()
 
     screen.blit(background_image, (0, 0))
