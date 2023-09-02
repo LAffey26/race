@@ -31,7 +31,6 @@ class Player(pygame.sprite.Sprite):
                                  1) % len(self.walking_on_ticks)
             self.surf = self.walking_on_ticks[self.correct_anim]
             self.surf.set_colorkey((255, 255, 255))
-            self
         if pressed_keys[K_SPACE] and not self.jumping:
             self.jumping = True
             self.jump_time = 60
