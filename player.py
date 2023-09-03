@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.surf_jump = pygame.image.load("image/chicken_jump.png")
         self.surf = self.walking_on_ticks[self.correct_anim]
         self.surf.set_colorkey((255, 255, 255))
-        self.rect = self.surf.get_rect(topleft=(300, 675))
+        self.rect = self.surf.get_rect(topleft=(300, 810))
         self.jumping = False
         self.jump_time = 0
         self.walk_animation_timer = pygame.time.get_ticks()
@@ -43,9 +43,9 @@ class Player(pygame.sprite.Sprite):
         if self.jump_time == 0:
             self.rect.move_ip(0, 5)
             self.surf = self.walking_on_ticks[self.correct_anim]
-        if self.rect.bottom == 675:
+        if self.rect.bottom == 810:
             self.jumping = False
 
     def limit(self):
-        if self.rect.bottom > 675:
-            self.rect.bottom = 675
+        if self.rect.bottom > 810:
+            self.rect.bottom = 810

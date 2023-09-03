@@ -21,17 +21,18 @@ class Objects(pygame.sprite.Sprite):
         self.surf = self.walking_on_ticks[self.correct_anim]
         self.surf.set_colorkey((255, 255, 255))
         self.rect = self.surf.get_rect(
-            topleft=(random.randint(WIDTH+20, WIDTH+100), random.randint(425, 475)))
+            topleft=(random.randint(WIDTH+20, WIDTH+100), random.randint(550,610)))
         self.speed = speed
         self.walk_animation_timer = pygame.time.get_ticks()
 
     def update(self):
-        walk_animation_speed = 500
+        walk_animation_speed = 100
 
         if pygame.time.get_ticks() - self.walk_animation_timer > walk_animation_speed:
             self.walk_animation_timer = pygame.time.get_ticks()
-            self.correct_anim = (self.correct_anim +
-                                 1) % len(self.walking_on_ticks)
+            self.correct_anim = (self.correct_anim +1) % len(self.walking_on_ticks)
+            self.surf = self.walking_on_ticks[self.correct_anim]
+            self.surf.set_colorkey((255,255,255))
 
         self.rect.move_ip(-self.speed, 0)
         if self.rect.left <= 0:

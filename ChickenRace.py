@@ -23,7 +23,7 @@ player = Player()
 enemy = Enemy()
 objects = Objects()
 ADDENEMY = pygame.USEREVENT + 0
-pygame.time.set_timer(ADDENEMY, random.randint(2000,3000))
+pygame.time.set_timer(ADDENEMY, random.randint(1550,2300))
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
@@ -67,7 +67,6 @@ while running:
 
     player.update(pressed_keys)
     player.limit()
-    objects.update()
     enemies.update()
 
     screen.blit(background_image, (0, 0))
