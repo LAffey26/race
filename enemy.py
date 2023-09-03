@@ -12,7 +12,7 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load("image/Enemy.png")
         self.surf.set_colorkey((255, 255, 255))
         self.rect = self.surf.get_rect(
-            topleft=(random.randint(WIDTH+20, WIDTH+120), 740))
+            topleft=(random.randint(WIDTH+20, WIDTH+120), 750))
         self.speed = speed
 
     def update(self):
