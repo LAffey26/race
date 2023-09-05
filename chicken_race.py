@@ -1,25 +1,23 @@
 import pygame
 import random
 from pygame.locals import (
-    K_SPACE,
     QUIT,
     K_ESCAPE,
     KEYDOWN,
     K_r)
-from enemy import Enemy
+from block import Block
 from player import Player
-from objects import Objects
-from GameOverSence import GameOverSence
-HEIGHT = 1080
-WIDTH = 1920
+from bird import Bird
+from game_over_sence import GameOverSence
+from config import WIDTH,HEIGHT
 
 
 pygame.init()
 
-background_image = pygame.image.load('image/background.png')
+background_image = pygame.image.load('images/background.png')
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
-start_3sec = pygame.image.load("image/start.png")
+start_3sec = pygame.image.load("images/start.png")
 start_3sec = pygame.transform.scale(start_3sec, (WIDTH, HEIGHT))
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -31,9 +29,9 @@ pygame.time.delay(2000)
 
 
 player = Player()
-enemy = Enemy()
-objects = Objects()
-gameoversence = GameOverSence()
+block = Block()
+bird = Bird()
+game_over_sence = GameOverSence()
 ADDENEMY = pygame.USEREVENT + 0
 pygame.time.set_timer(ADDENEMY, random.randint(1550, 2300))
 
@@ -69,7 +67,7 @@ while running:
         if event.type == QUIT:
             running = False
         if event.type == ADDENEMY:
-            new_enemy = random.choice((Enemy(speed), Objects(speed)))
+            new_enemy = random.choice((Block(speed), Bird(speed)))
             enemies.add(new_enemy)
             all_sprites.add(new_enemy)
     enemy_speed_timer += 1
@@ -97,7 +95,7 @@ while running:
         screen.blit(entity.surf, entity.rect)
     if pygame.sprite.spritecollideany(player, enemies):
         player.kill()
-        if gameoversence.run_file(score,screen) :
+        if game_over_sence.run_file(score,screen) :
             reset_game()
     score_text = font.render(f"Score: {score}", True, (0, 0, 0))
     screen.blit(score_text, (1750, 10))
