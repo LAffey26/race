@@ -5,19 +5,21 @@ from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
     K_r)
-from block import Block
-from player import Player
-from bird import Bird
-from game_over_sence import GameOverSence
-from config import WIDTH,HEIGHT
-
-
+from race.wolf import Wolf
+from race.player import Player
+from race.bird import Bird
+from race.game_over_sence import GameOverSence
+import race.config
+HEIGHT = race.config.HEIGHT
+WIDTH = race.config.WIDTH
+branch ="race/images/"
 pygame.init()
 
-background_image = pygame.image.load('images/background.png')
+
+background_image = pygame.image.load(branch+'background.png')
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
-start_3sec = pygame.image.load("images/start.png")
+start_3sec = pygame.image.load(branch+"start.png")
 start_3sec = pygame.transform.scale(start_3sec, (WIDTH, HEIGHT))
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -29,7 +31,7 @@ pygame.time.delay(2000)
 
 
 player = Player()
-block = Block()
+wolf = Wolf()
 bird = Bird()
 game_over_sence = GameOverSence()
 ADDENEMY = pygame.USEREVENT + 0
@@ -44,7 +46,7 @@ font = pygame.font.Font(None, 36)
 score = 0
 enemy_speed_timer = 0
 time = 60
-speed = 3
+speed = 5
 running = True
 
 def reset_game():
@@ -67,7 +69,7 @@ while running:
         if event.type == QUIT:
             running = False
         if event.type == ADDENEMY:
-            new_enemy = random.choice((Block(speed), Bird(speed)))
+            new_enemy = random.choice((Wolf(speed), Bird(speed)))
             enemies.add(new_enemy)
             all_sprites.add(new_enemy)
     enemy_speed_timer += 1
@@ -76,8 +78,8 @@ while running:
     if enemy_speed_timer == 1200:
         enemy_speed_timer = 0
         speed += 1
-    if speed == 6:
-        speed = 6
+    if speed == 8:
+        speed = 8
 
     if time == 0:
         time = 60
