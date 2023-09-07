@@ -4,16 +4,16 @@ from pygame.locals import (
     K_SPACE,
     KEYDOWN
 )
-import race.config
-WIDTH = race.config.WIDTH
-branch = race.config.branch
-WHITE = race.config.WHITE
+from race.config import branch
+from race.config import animation_bird
+from race.config import WIDTH
+from race.config import WHITE
 from race.animation_func import change
 class Bird(pygame.sprite.Sprite):
     def __init__(self, speed=5):
         super(Bird, self).__init__()
         self.frame_change = 0
-        self.tuple_with_png = [pygame.image.load(branch+frame+".png") for frame in race.config.animation_bird]
+        self.tuple_with_png = [pygame.image.load(branch+frame+".png") for frame in animation_bird]
         self.surf = self.tuple_with_png[self.frame_change]
         self.surf.set_colorkey(WHITE)
         self.rect = self.surf.get_rect(

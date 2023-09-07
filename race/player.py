@@ -4,10 +4,8 @@ from pygame.locals import (
     KEYDOWN)
 from race.animation_func import change
 import race.animation_func
-import race.config
-branch = race.config.branch
-WHITE = race.config.WHITE
-
+from race.config import branch
+from race.config import WHITE
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()

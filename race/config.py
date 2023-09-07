@@ -1,7 +1,10 @@
 """size only Full HD"""
+
 HEIGHT = 1080
 WIDTH = 1920
+
 """animation"""
+
 branch = "race/images/"
 animation_bird = (
     "bird_1",
@@ -28,6 +31,8 @@ animation_wolf = (
     "wolf_7", 
     "wolf_8",
     )
+
 """color"""
+
 WHITE = (255,255,255)
 BLACK = (0,0,0)

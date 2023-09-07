@@ -1,8 +1,8 @@
 import pygame
 import random
-import race.config
-WHITE = race.config.WHITE
-branch = race.config.branch
+from race.config import branch
+from race.config import WHITE
+from race.config import animation_wolf
 from race.animation_func import change
 
 
@@ -11,7 +11,7 @@ class Wolf(pygame.sprite.Sprite):
     def __init__(self, speed=5):
         super(Wolf, self).__init__()
         self.frame_change = 0
-        self.tuple_with_png = [pygame.image.load(branch+frame+".png") for frame in race.config.animation_wolf]
+        self.tuple_with_png = [pygame.image.load(branch+frame+".png") for frame in animation_wolf]
         self.surf = self.tuple_with_png[self.frame_change]
         self.surf.set_colorkey(WHITE)
         self.rect = self.surf.get_rect(

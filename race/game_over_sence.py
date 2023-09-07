@@ -3,9 +3,9 @@ from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
     )
-import race.config
-branch = race.config.branch
-BLACK = race.config.BLACK
+
+from race.config import branch
+from race.config import BLACK
 class GameOverSence(pygame.sprite.Sprite):
     def __init__(self):
         super(GameOverSence, self).__init__()

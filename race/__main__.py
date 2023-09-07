@@ -9,10 +9,10 @@ from race.wolf import Wolf
 from race.player import Player
 from race.bird import Bird
 from race.game_over_sence import GameOverSence
-import race.config
-HEIGHT = race.config.HEIGHT
-WIDTH = race.config.WIDTH
-branch ="race/images/"
+from race.config import HEIGHT
+from race.config import WIDTH
+from race.config import BLACK
+from race.config import branch
 pygame.init()
 
 
@@ -99,7 +99,7 @@ while running:
         player.kill()
         if game_over_sence.run_file(score,screen) :
             reset_game()
-    score_text = font.render(f"Score: {score}", True, (0, 0, 0))
+    score_text = font.render(f"Score: {score}", True, BLACK)
     screen.blit(score_text, (1750, 10))
 
     pygame.display.flip()
