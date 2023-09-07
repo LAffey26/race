@@ -1,4 +1,4 @@
-#ChichenRace
+ChichenRace
 =============
 
 Description:
