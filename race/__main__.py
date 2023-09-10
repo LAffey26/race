@@ -12,20 +12,20 @@ from race.game_over_sence import GameOverSence
 from race.config import HEIGHT
 from race.config import WIDTH
 from race.config import BLACK
-from race.config import branch
+from race.config import images_folder
 pygame.init()
 
 
-background_image = pygame.image.load(branch+'background.png')
+background_image = pygame.image.load(images_folder+'background.png')
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
-start_3sec = pygame.image.load(branch+"start.png")
-start_3sec = pygame.transform.scale(start_3sec, (WIDTH, HEIGHT))
+boot_screen = pygame.image.load(images_folder+"start.png")
+boot_screen = pygame.transform.scale(boot_screen, (WIDTH, HEIGHT))
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 name = pygame.display.set_caption("ChickenRace")
 
-screen.blit(start_3sec,(0,0))
+screen.blit(boot_screen,(0,0))
 pygame.display.flip()
 pygame.time.delay(2000)
 
@@ -78,8 +78,8 @@ while running:
     if enemy_speed_timer == 1200:
         enemy_speed_timer = 0
         speed += 1
-    if speed == 8:
-        speed = 8
+    if speed == 13:
+        speed = 13 
 
     if time == 0:
         time = 60
@@ -97,7 +97,7 @@ while running:
         screen.blit(entity.surf, entity.rect)
     if pygame.sprite.spritecollideany(player, enemies):
         player.kill()
-        if game_over_sence.run_file(score,screen) :
+        if game_over_sence.restart_game_func(score,screen) :
             reset_game()
     score_text = font.render(f"Score: {score}", True, BLACK)
     screen.blit(score_text, (1750, 10))

@@ -8,10 +8,8 @@ Dodge obstacles and try to collect as many points as possible
 
 Control:
 ============
-Space - jump
-r - restart
+`Space` - jump
+`r` - restart
 
-Extensions:
-============
-pygame
+
 

@@ -5,7 +5,7 @@ WIDTH = 1920
 
 """animation"""
 
-branch = "race/images/"
+images_folder = "race/images/"
 animation_bird = (
     "bird_1",
     "bird_3",
