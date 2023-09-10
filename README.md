@@ -8,7 +8,7 @@ Dodge obstacles and try to collect as many points as possible
 
 Control:
 ============
-`Space` - jump
+`Space` - jump\n
 `r` - restart
 
 
